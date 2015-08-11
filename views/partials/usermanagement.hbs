@@ -10,48 +10,52 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#userCreateModal">Create User</button>
-    <div id="userCreateModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-header">
-                <button type="button" class="close" data-dissmiss="modal">&times;</button>
-                <h4 class="modal-title">Create New User</h4>
-            </div>
-            <div class="modal-body">
-                       
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dissmiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dissmiss="modal">Create User</button>
+    <div id="container">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#userCreateModal">Create User</button>
+        <div id="userCreateModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dissmiss="modal">&times;</button>
+                    <h4 class="modal-title">Create New User</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dissmiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dissmiss="modal">Create User</button>
+                </div>
             </div>
         </div>
+        <table class="table-striped table-condensed table-hover table table-bordered">
+            <tr>
+                <th>Full Name</th>
+                <th>Display Name</th>
+                <th>M Number</th>
+                <th>E-Mail</th>
+                <th>User Role</th>
+                <th>Contact User</th>
+                <th>Delete User</th>
+            </tr>
+            {{#each users}}
+            <tr>
+                <td>{{this.profile.fullName}}</td>
+                <td>{{this.profile.displayName}}</td>
+                <td>{{this.mNumber}}</td>
+                <td>{{this.email}}</td>
+                <td>
+                    <select>
+                        <option>Blocked</option>
+                        <option>User</option>
+                        <option>Admin</option>
+                        <option>Site Admin</option>
+                    </select>
+                </td>
+                <td><a href="/">Contact User</a></td>
+                <td><a href="/">Delete User</a></td>
+            </tr>
+            {{/each}}
+        </table>
     </div>
-    <table class="table-striped table-condensed table-hover table table-bordered">
-        <tr>
-            <th>Full Name</th>
-            <th>Display Name</th>
-            <th>M Number</th>
-            <th>E-Mail</th>
-            <th>User Role</th>
-            <th>Contact User</th>
-            <th>Delete User</th>
-        </tr>
-        {{#each users}}
-        <tr>
-            <td>{{this.profile.fullName}}</td>
-            <td>{{this.profile.displayName}}</td>
-            <td>{{this.mNumber}}</td>
-            <td>{{this.email}}</td>
-            <td><select>
-                    <option>Blocked</option>
-                    <option>User</option>
-                    <option>Admin</option>
-                    <option>Site Admin</option>
-                </select></td>
-            <td><a href="/">Contact User</a></td>
-            <td><a href="/">Delete User</a></td>
-        </tr>
-        {{/each}}
-    </table>
 </body>
 </html>
