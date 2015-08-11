@@ -14,7 +14,7 @@ pids
 logs
 results
 tmp
-
+.vs
 config
 
 npm-debug.log
