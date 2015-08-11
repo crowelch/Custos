@@ -104,7 +104,7 @@
                     <option>Site Admin</option>
                 </select></td>
             <td><a href="/">Contact User</a></td>
-            <td><a data-toggle="modal" data-target="#deleteUserModal" data-user-id="{{this._id}}" data-user-fullname="{{this.profile.fullName}} " data-user-email="{{this.email}}">Delete User</a></td>
+            <td><a data-toggle="modal" data-target="#deleteUserModal" data-user-id="{{this._id}}" data-user-fullname="{{this.profile.fullName}}" data-user-email="{{this.email}}">Delete User</a></td>
         </tr>
         {{/each}}
     </table>
@@ -120,8 +120,8 @@
         var userEmail = $(e.relatedTarget).data('user-email');
         //populate the textbox
         $(e.currentTarget).find('input[name="userId"]').val(userId);
-
-        if (userName === ""){
+        
+        if (userName === ''){
             $(e.currentTarget).find('h4[name="usernameheader"]').text("Delete User");
             var message = "You are about to delete the profile for " + userEmail + ". This is permanent. Do you want to continue?";
             $(e.currentTarget).find('p[name="usernameparagraph"]').text(message);
