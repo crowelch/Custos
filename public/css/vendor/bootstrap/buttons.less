@@ -1,52 +1,34 @@
-// Button variants
 //
-// Easily pump out default styles, as well as :hover, :focus, :active,
-// and disabled options for all buttons
+// Close icons
+// --------------------------------------------------
 
-.button-variant(@color; @background; @border) {
-  color: @color;
-  background-color: @background;
-  border-color: @border;
+
+.close {
+  float: right;
+  font-size: (@font-size-base * 1.5);
+  font-weight: @close-font-weight;
+  line-height: 1;
+  color: @close-color;
+  text-shadow: @close-text-shadow;
+  .opacity(.2);
 
   &:hover,
-  &:focus,
-  &.focus,
-  &:active,
-  &.active,
-  .open > .dropdown-toggle& {
-    color: @color;
-    background-color: darken(@background, 10%);
-        border-color: darken(@border, 12%);
-  }
-  &:active,
-  &.active,
-  .open > .dropdown-toggle& {
-    background-image: none;
-  }
-  &.disabled,
-  &[disabled],
-  fieldset[disabled] & {
-    &,
-    &:hover,
-    &:focus,
-    &.focus,
-    &:active,
-    &.active {
-      background-color: @background;
-          border-color: @border;
-    }
+  &:focus {
+    color: @close-color;
+    text-decoration: none;
+    cursor: pointer;
+    .opacity(.5);
   }
 
-  .badge {
-    color: @background;
-    background-color: @color;
+  // Additional properties for button version
+  // iOS requires the button element instead of an anchor tag.
+  // If you want the anchor version, it requires `href="#"`.
+  // See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+  button& {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
   }
-}
-
-// Button sizes
-.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
-  padding: @padding-vertical @padding-horizontal;
-  font-size: @font-size;
-  line-height: @line-height;
-  border-radius: @border-radius;
 }

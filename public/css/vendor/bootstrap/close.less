@@ -1,34 +1,33 @@
 //
-// Close icons
+// Component animations
 // --------------------------------------------------
 
+// Heads up!
+//
+// We don't use the `.opacity()` mixin here since it causes a bug with text
+// fields in IE7-8. Source: https://github.com/twbs/bootstrap/pull/3552.
 
-.close {
-  float: right;
-  font-size: (@font-size-base * 1.5);
-  font-weight: @close-font-weight;
-  line-height: 1;
-  color: @close-color;
-  text-shadow: @close-text-shadow;
-  .opacity(.2);
-
-  &:hover,
-  &:focus {
-    color: @close-color;
-    text-decoration: none;
-    cursor: pointer;
-    .opacity(.5);
+.fade {
+  opacity: 0;
+  .transition(opacity .15s linear);
+  &.in {
+    opacity: 1;
   }
+}
 
-  // Additional properties for button version
-  // iOS requires the button element instead of an anchor tag.
-  // If you want the anchor version, it requires `href="#"`.
-  // See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
-  button& {
-    padding: 0;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    -webkit-appearance: none;
-  }
+.collapse {
+  display: none;
+
+  &.in      { display: block; }
+  tr&.in    { display: table-row; }
+  tbody&.in { display: table-row-group; }
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  .transition-property(~"height, visibility");
+  .transition-duration(.35s);
+  .transition-timing-function(ease);
 }
