@@ -120,7 +120,7 @@
 
         //populate the textbox
         $(e.currentTarget).find('input[name="userId"]').val(userId);
-        $(e.currentTarget).find('h4[name="usernameheader"]').val(userName);
-        $(e.currentTarget).find('p[name="usernameparagraph"]').val(userName);
+        $(e.currentTarget).find('h4[name="usernameheader"]').innerHTML(userName);
+        $(e.currentTarget).find('p[name="usernameparagraph"]').innerHTML(userName);
     });
 </script>
