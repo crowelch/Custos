@@ -12,7 +12,6 @@ var mongoClient = require('mongodb').MongoClient;
  * Login page.
  */
 exports.getLogin = function (req, res) {
-
   if (req.user) return res.redirect('/');
   console.log('csrfToken = ' + req.csrfToken());
   res.render('account/login', {
@@ -31,7 +30,6 @@ exports.getUserManagement = function (req, res) {
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
 		usersCollection = userCollection;
-		console.log(usersCollection);
 		res.render('partials/usermanagement', {
 			title: 'User Management Portal',
 			_csrf: req.csrfToken(),
@@ -383,11 +381,11 @@ function getCollection(collectionName, callback) {
 			return callback(err);
 		}
 		
-		var userResult = db.collection(collectionName).find();
-		var finalResult = [];
-		while (userResult.hasNext()) { 
-			finalResult.push(userResult.next());
-		}		
-		return callback(null, finalResult);
+		db.collection(collectionName).find().toArray(function (err, document) {
+			if (!err) {
+				return callback(null, document);
+			}
+			return callback(err);
+		});		
 	});
 }
