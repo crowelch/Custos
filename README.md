@@ -1,10 +1,4 @@
-
-
-A handlebars based conversion of hackathon-starter project.
-
-[Hackathon Starter](https://github.com/sahat/hackathon-starter)
-
-Just playing around.
+Inventory management system built on node.js and handlebars
 
 
 License
