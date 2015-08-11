@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/assets/main.css" />
+</head>
+<body>
+    <table class="table-striped table-condensed table-hover table table-bordered">
+        <tr>
+            <th>Full Name</th>
+            <th>Display Name</th>
+            <th>M Number</th>
+            <th>E-Mail</th>
+            <th>User Role</th>
+            <th>Contact User</th>
+            <th>Delete User</th>
+        </tr>
+        {{#each users}}
+        <tr>
+            <td>{{this.profile.fullName}}</td>
+            <td>{{this.profile.displayName}}</td>
+            <td>{{this.mNumber}}</td>
+            <td>{{this.email}}</td>
+            <td><select>
+                    <option>Quarantined</option>
+                    <option>User</option>
+                    <option>Admin</option>
+                    <option>Site Admin</option>
+                </select></td>
+            <td><a href="/">Contact User</a></td>
+            <td><a href="/">Delete User</a></td>
+        </tr>
+        {{/each}}
+    </table>
+
+    <div class="page-header">
+        <h3>Create User</h3>
+    </div>
+    <form id="signup-form" method="POST" class="form-horizontal">
+        <input type="hidden" name="_csrf" value="{{_csrf}}" />
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-7">
+                <input type="email" name="email" id="email" placeholder="Email" autofocus="autofocus" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Password</label>
+            <div class="col-sm-7">
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword" class="col-sm-3 control-label">Confirm Password</label>
+            <div class="col-sm-7">
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-7">
+                <button type="submit" class="btn btn-success"><span class="fa fa-user-plus"></span>Create</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
