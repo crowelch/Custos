@@ -71,7 +71,7 @@
                     <h4 class="modal-title" name="usernameheader"></h4>
                 </div>
                 <div class="modal-body">
-                    <p>You are about to delete the profile for <p name="usernameparagraph">. This is permanent. Do you want to continue?</p>
+                    <p name="usernameparagraph"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -121,6 +121,7 @@
         //populate the textbox
         $(e.currentTarget).find('input[name="userId"]').val(userId);
         $(e.currentTarget).find('h4[name="usernameheader"]').text("Delete User: " + userName);
-        $(e.currentTarget).find('p[name="usernameparagraph"]').innerHTML = userName;
+        var message = "You are about to delete the profile for " + userName + ". This is permanent. Do you want to continue?";
+        $(e.currentTarget).find('p[name="usernameparagraph"]').text(message);
     });
 </script>
