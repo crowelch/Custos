@@ -121,6 +121,6 @@
         //populate the textbox
         $(e.currentTarget).find('input[name="userId"]').val(userId);
         $(e.currentTarget).find('h4[name="usernameheader"]').text(userName);
-        $(e.currentTarget).find('p[name="usernameparagraph"]').innerText = userName;
+        $(e.currentTarget).find('p[name="usernameparagraph"]').innerHTML = userName;
     });
 </script>
