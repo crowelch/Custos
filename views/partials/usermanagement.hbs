@@ -117,7 +117,7 @@
         //get data-id attribute of the clicked element
         var userId = $(e.relatedTarget).data('user-id');
         var userName = $(e.relatedTarget).data('user-fullname');
-
+        console.log(userName);
         //populate the textbox
         $(e.currentTarget).find('input[name="userId"]').val(userId);
         $(e.currentTarget).find('h4[name="usernameheader"]').text(userName);
