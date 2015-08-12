@@ -180,7 +180,7 @@ exports.postUpdatePassword = function(req, res, next) {
  * Delete user account.
  */
 exports.postDeleteAccount = function (req, res, next) {
-	console.log(req);
+	console.log(req.params);
   //User.remove({ _id: req.user.id }, function(err) {
   //  if (err) return next(err);
   //  req.flash('info', { msg: 'the account has been deleted.' });
