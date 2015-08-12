@@ -128,7 +128,7 @@ exports.updateUserPermissions = function (req, res, next) {
 	User.findById(req.body.userId, function (err, user) {
 		if (err) return next(err);
 				
-		if (roleName === siteAdmin) {
+		if (roleName === "SiteAdmin") {
 			user.isSiteAdmin = true
 		}
 		else { 
