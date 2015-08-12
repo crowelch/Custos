@@ -194,9 +194,9 @@
             var mNumber = $('#mNumber').val();
             var roleName = $('#userRole')[0];
             var roleOptions = roleName.options;
-            var selectedOption = roleOptions[roleName.selectedIndex];
+            var selectedOption = roleOptions[roleName.selectedIndex].val();
 
-            console.log(selectedOption.val());
+            console.log(selectedOption);
             console.log(mNumber);
             console.log(userEmail);
 
