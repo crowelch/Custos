@@ -211,8 +211,11 @@
         }
 
         function contactUser() {
-            var userEmail;
-            var emailBody;
+            var userEmail = $('#email').val;
+            var emailSubject = $('#subject');
+            var emailBody = $('#body');
+
+            alert(userEmail + " " + emailSubject + " " + emailBody);
             $.ajax({
                 url: '/contactUser',
                 dataType: 'json',
