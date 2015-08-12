@@ -27,7 +27,7 @@ exports.getLogin = function (req, res) {
  
 exports.getUserManagement = function (req, res) {
 	var usersCollection;
-	console.log(req.user);
+	console.log(req.user._id);
 	var authUser = req.user;
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
