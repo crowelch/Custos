@@ -129,12 +129,14 @@
             <td>{{this.mNumber}}</td>
             <td>{{this.email}}</td>
             <td>
+                {{#select this.profile.roleName}}
                 <select>
                     <option>Blocked</option>
                     <option>User</option>
                     <option>Admin</option>
                     <option>Site Admin</option>
                 </select>
+                {{/select}}
             </td>
             <td><a data-toggle="modal" data-target="#contactUserModal" data-user-email="{{this.email}}">Contact User</a></td>
             <td><a data-toggle="modal" data-target="#deleteUserModal" data-user-id="{{this._id}}" data-user-fullname="{{this.profile.fullName}}" data-user-email="{{this.email}}">Delete User</a></td>
@@ -145,6 +147,15 @@
 </html>
 
 <script type="text/javascript">
+
+    var Handlebars = require('handlebars/runtime')['default'];
+    Handlebars.registerHelper('select', function (value, options) {
+        var $el = $('<select />').html(options.fn(this));
+        $el.find('[value="' + value + '"]').attr({ 'selected': 'selected' });
+        return $el.html();
+    });
+
+
     $('#deleteUserModal').on('show.bs.modal', function (e) {
 
         //get data-id attribute of the clicked element
