@@ -175,7 +175,7 @@
 
     $('#contactUserModal').on('show.bs.modal', function (e) {
         var userEmail = $(e.relatedTarget).data('user-email');
-        $(e.currentTarget).find('input[name="email"]').text(message);
+        $(e.currentTarget).find('input[name="email"]').val(userEmail);
     });
 
     function deleteUser() {
