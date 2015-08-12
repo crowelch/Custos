@@ -232,7 +232,7 @@
             $.ajax({
                 url: '/updateUserPermissions',
                 dataType: 'json',
-                data: { "userId": userId, "roleName": this.options[this.selectedIndex].value },
+                data: { "userId": userId, "roleName": $("#userRole").options[$("#userRole").selectedIndex].value },
                 type: "POST",
                 success: function (data) {
 
