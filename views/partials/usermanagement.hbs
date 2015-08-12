@@ -139,7 +139,7 @@
         var userId = $('#userId').val();
         $.ajax({
 
-            url: 'deleteUser',
+            url: '/deleteUser',
             data: userId,
             type: "POST",
             success: function (data) {
