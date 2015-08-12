@@ -27,8 +27,6 @@ exports.getLogin = function (req, res) {
  
 exports.getUserManagement = function (req, res) {
 	var usersCollection;
-	console.log(req.user._id);
-	var authUser = req.user;
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
 		usersCollection = userCollection;
@@ -36,7 +34,7 @@ exports.getUserManagement = function (req, res) {
 			title: 'User Management Portal',
 			_csrf: req.csrfToken(),
 			users: usersCollection,
-			user: authUser
+			userId: req.user._id
 		});
 	});
 };
