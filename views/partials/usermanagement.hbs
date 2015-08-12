@@ -177,6 +177,7 @@
 
     $('#createUserModal').on('show.bs.modal', function (e) {
         $(e.currentTarget).find('input[name="mNumber"]').val("M");
+        $(e.currentTarget).find('input[name="email"]').val("");
     });
 
     function deleteUser() {
@@ -227,10 +228,11 @@
         }
 
         function setUserPermission(userId) {
+            var roleName = $('select option:selected').val();
             $.ajax({
                 url: '/updateUserPermissions',
                 dataType: 'json',
-                data: { "userId": userId, "roleName": document.getElementById("userRole").value },
+                data: { "userId": userId, "roleName": roleName },
                 type: "POST",
                 success: function (data) {
 
