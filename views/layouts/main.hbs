@@ -22,3 +22,99 @@
 	<script src="/assets/application.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+    $('#deleteUserModal').on('show.bs.modal', function (e) {
+
+        //get data-id attribute of the clicked element
+        var userId = $(e.relatedTarget).data('user-id');
+        var userName = $(e.relatedTarget).data('user-fullname');
+        var userEmail = $(e.relatedTarget).data('user-email');
+        //populate the textbox
+        $(e.currentTarget).find('input[name="userId"]').val(userId);
+
+        if (userName === '') {
+            $(e.currentTarget).find('h4[name="usernameheader"]').text("Delete User");
+            var message = "You are about to delete the profile for " + userEmail + ". This is permanent. Do you want to continue?";
+            $(e.currentTarget).find('p[name="usernameparagraph"]').text(message);
+        }
+        else {
+            $(e.currentTarget).find('h4[name="usernameheader"]').text("Delete User: " + userName);
+            var message = "You are about to delete the profile for " + userName + ". This is permanent. Do you want to continue?";
+            $(e.currentTarget).find('p[name="usernameparagraph"]').text(message);
+        }
+
+    });
+
+    $('#contactUserModal').on('show.bs.modal', function (e) {
+        var userEmail = $(e.relatedTarget).data('user-email');
+        $(e.currentTarget).find('input[name="contactEmail"]').val(userEmail);
+        $(e.currentTarget).find('input[name="subject"]').val("");
+        $(e.currentTarget).find('textarea[name="body"]').val("");
+
+    });
+
+    $('#createUserModal').on('show.bs.modal', function (e) {
+        $(e.currentTarget).find('input[name="mNumber"]').val("M");
+        $(e.currentTarget).find('input[name="email"]').val("");
+    });
+
+    function deleteUser() {
+        var userId = $('#userId').val();
+        $.ajax({
+            url: '/deleteUser',
+            dataType: 'json',
+            data: { "userId": userId },
+            type: "POST",
+            success: function (data) {
+            }
+        });
+    }
+
+    function createUser() {
+        var userEmail = $('#email').val();
+        var mNumber = $('#mNumber').val();
+        var roleName = $('select option:selected').val();
+
+        console.log(roleName);
+        console.log(mNumber);
+        console.log(userEmail);
+
+        $.ajax({
+            url: '/createUser',
+            dataType: 'json',
+            data: { "userEmail": userEmail, "mNumber": mNumber, "roleName": roleName },
+            type: "POST",
+            success: function (data) {
+            }
+        });
+    }
+
+    function contactUser() {
+        var userEmail = $('#contactEmail').val();
+        var emailSubject = $('#subject').val();
+        var emailBody = $('#body').val();
+
+        $.ajax({
+            url: '/contactUser',
+            dataType: 'json',
+            data: { "userEmail": userEmail, "emailBody": emailBody },
+            type: "POST",
+            success: function (data) {
+
+            }
+        });
+    }
+
+    function setUserPermission(ddlRole, userId) {
+        $.ajax({
+            url: '/updateUserPermissions',
+            dataType: 'json',
+            data: { "userId": userId, "roleName": ddlRole.value },
+            type: "POST",
+            success: function (data) {
+
+            }
+        });
+    }
+</script>
