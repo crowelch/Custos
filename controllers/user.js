@@ -179,13 +179,13 @@ exports.postUpdatePassword = function(req, res, next) {
  * POST /account/delete
  * Delete user account.
  */
-exports.postDeleteAccount = function(req, res, next) {
-  User.remove({ _id: req.user.id }, function(err) {
-    if (err) return next(err);
-    req.logout();
-    req.flash('info', { msg: 'Your account has been deleted.' });
-    res.redirect('/');
-  });
+exports.postDeleteAccount = function (req, res, next) {
+	console.log(req.params.userId);
+  //User.remove({ _id: req.user.id }, function(err) {
+  //  if (err) return next(err);
+  //  req.flash('info', { msg: 'the account has been deleted.' });
+  //  res.redirect('/usermanagement');
+  //});
 };
 
 /**
