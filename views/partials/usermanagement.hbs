@@ -101,7 +101,7 @@
                         <div class="form-group">
                             <label for="subject" class="col-sm-3 control-label">Subject</label>
                             <div class="col-sm-7">
-                                <input type="text" name="subject" id="subject" placeholder="Email" class="form-control" />
+                                <input type="text" name="subject" id="subject" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -176,6 +176,9 @@
     $('#contactUserModal').on('show.bs.modal', function (e) {
         var userEmail = $(e.relatedTarget).data('user-email');
         $(e.currentTarget).find('input[name="email"]').val(userEmail);
+        $(e.currentTarget).find('input[name="subject"]').val("");
+        $(e.currentTarget).find('textarea[name="body"]').val("");
+
     });
 
     function deleteUser() {
