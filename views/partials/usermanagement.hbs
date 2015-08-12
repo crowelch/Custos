@@ -81,6 +81,42 @@
             </div>
         </div>
     </div>
+
+    <div id="contactUserModal" class="modal fade" role="dialog" tabindex="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="hidden" name="userId" id="userId" />
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" name="usernameheader">Contact User</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-7">
+                            <input type="email" readonly="readonly" name="email" id="email" placeholder="Email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class="col-sm-3 control-label">Subject</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="subject" id="subject" placeholder="Email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="body" class="col-sm-3 control-label">Body</label>
+                        <div class="col-sm-7">
+                            <textarea name="body" id="body" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" onclick="contactUser()" data-dismiss="modal">Contact User</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
      <table class="table-striped table-condensed table-hover table table-bordered">
         <tr>
@@ -104,7 +140,7 @@
                     <option>Admin</option>
                     <option>Site Admin</option>
                 </select></td>
-            <td><a href="/">Contact User</a></td>
+            <td><a data-toggle="modal" data-target="#contactUserModal" data-user-email="{{this.email}}">Contact User</a></td>
             <td><a data-toggle="modal" data-target="#deleteUserModal" data-user-id="{{this._id}}" data-user-fullname="{{this.profile.fullName}}" data-user-email="{{this.email}}">Delete User</a></td>
         </tr>
         {{/each}}
@@ -135,16 +171,52 @@
        
     });
 
+    $('#contactUserModal').on('show.bs.modal', function (e) {
+        var userEmail = $(e.relatedTarget).data('user-email');
+        $(e.currentTarget).find('input[name="email"]').text(message);
+    });
+
     function deleteUser() {
         var userId = $('#userId').val();
         $.ajax({
-            url: 'http://kennethfechter.me/deleteUser',
+            url: '/deleteUser',
             dataType: 'json',
             data: { "userId": userId },
             type: "POST",
             success: function (data) {
             }
         });
+
+        function createUser() {
+            var userEmail;
+            var mNumber;
+            var roleName;
+            var isAdmin;
+            var isSiteAdmin;
+
+            $.ajax({
+                url: '/createUser',
+                dataType: 'json',
+                data: { "userEmail": userEmail, "mNumber": mNumber, "isAdmin": isAdmin },
+                type: "POST",
+                success: function (data) {
+                }
+            });
+        }
+
+        function contactUser() {
+            var userEmail;
+            var emailBody;
+            $.ajax({
+                url: '/contactUser',
+                dataType: 'json',
+                data: { "userEmail": userEmail, "emailBody": emailBody },
+                type: "POST",
+                success: function (data) {
+
+                }
+            });
+        }
 
     }
 </script>

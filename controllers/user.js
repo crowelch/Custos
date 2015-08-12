@@ -103,17 +103,17 @@ exports.createUser = function(req, res, next) {
 	isSiteAdmin: true
   });
 
-  User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
-    if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/usermanagement');
-    }
-    user.save(function(err) {
-      if (err) return next(err);
-	  res.flash('success', { msg: 'The account was created successfully' });
-	  return res.redirect('/usermanagement');
-    });
-  });
+  //User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
+  //  if (existingUser) {
+  //    req.flash('errors', { msg: 'Account with that email address already exists.' });
+  //    return res.redirect('/usermanagement');
+  //  }
+  //  user.save(function(err) {
+  //    if (err) return next(err);
+	 // res.flash('success', { msg: 'The account was created successfully' });
+	 // return res.redirect('/usermanagement');
+  //  });
+  //});
 };
 
 /**
