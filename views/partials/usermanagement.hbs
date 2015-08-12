@@ -86,16 +86,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <input type="hidden" name="userId" id="userId" />
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" name="usernameheader">Contact User</h4>
+                    <h4 class="modal-title">Contact User</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" name="commentform" method="post" action="send_form_email.php">
+                    <form class="form-horizontal" name="commentform">
                         <div class="form-group">
-                            <label class="control-label col-md-4" for="email">Email Address</label>
+                            <label class="control-label col-md-4" for="contactEmail">Email Address</label>
                             <div class="col-md-6">
-                                <input type="email" readonly="readonly" class="form-control" id="email" name="email" />
+                                <input type="email" readonly="readonly" class="form-control" id="contactEmail" name="contactEmail" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -175,7 +174,7 @@
 
     $('#contactUserModal').on('show.bs.modal', function (e) {
         var userEmail = $(e.relatedTarget).data('user-email');
-        $(e.currentTarget).find('input[name="email"]').val(userEmail);
+        $(e.currentTarget).find('input[name="contactEmail"]').val(userEmail);
         $(e.currentTarget).find('input[name="subject"]').val("");
         $(e.currentTarget).find('textarea[name="body"]').val("");
 
@@ -211,11 +210,14 @@
         }
 
         function contactUser() {
-            var userEmail = $('#email').val();
+            var userEmail = $('#contactEmail').val();
             var emailSubject = $('#subject').val();
             var emailBody = $('#body').val();
 
-            alert(userEmail + " " + emailSubject + " " + emailBody);
+            console.log(userEmail);
+            console.log(emailSubject);
+            console.log(emailBody);
+
             $.ajax({
                 url: '/contactUser',
                 dataType: 'json',
