@@ -128,7 +128,7 @@
             <td>{{this.mNumber}}</td>
             <td>{{this.email}}</td>
             <td>
-                <select id="userRole" onchange="setUserPermission()">
+                <select id="userRole" onchange="setUserPermission('{{this._id}}')">
                     {{#select this.profile.roleName}}
                     <option value="Blocked">Blocked</option>
                     <option value="User">User</option>
