@@ -128,7 +128,7 @@
             <td>{{this.mNumber}}</td>
             <td>{{this.email}}</td>
             <td>
-                <select>
+                <select id="userRole" onchange="setUserPermission({{this._id}})">
                     {{#select this.profile.roleName}}
                     <option value="Blocked">Blocked</option>
                     <option value="User">User</option>
@@ -219,6 +219,18 @@
                 url: '/contactUser',
                 dataType: 'json',
                 data: { "userEmail": userEmail, "emailBody": emailBody },
+                type: "POST",
+                success: function (data) {
+
+                }
+            });
+        }
+
+        function setUserPermission(userId) {
+            $.ajax({
+                url: '/updateUserPermissions',
+                dataType: 'json',
+                data: { "userId": userId, "roleName": document.getElementById("userRole").value },
                 type: "POST",
                 success: function (data) {
 
