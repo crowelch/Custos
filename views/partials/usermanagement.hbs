@@ -228,11 +228,10 @@
         }
 
         function setUserPermission(ddlRole, userId) {
-            alert(ddlRole.value);
             $.ajax({
                 url: '/updateUserPermissions',
                 dataType: 'json',
-                data: { "userId": userId, "roleName":"" },
+                data: { "userId": userId, "roleName": ddlRole.value },
                 type: "POST",
                 success: function (data) {
 
