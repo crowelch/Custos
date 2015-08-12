@@ -34,7 +34,6 @@ exports.getUserManagement = function (req, res) {
 			title: 'User Management Portal',
 			_csrf: req.csrfToken(),
 			users: usersCollection,
-			user: req.user
 		});
 	});
 };
