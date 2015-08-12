@@ -138,8 +138,10 @@
     function deleteUser() {
         var userId = $('#userId').val();
         $.ajax({
+
             url: 'deleteUser',
             data: userId,
+            type: "POST",
             success: function (data) {
             }
         });
