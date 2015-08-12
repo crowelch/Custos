@@ -228,11 +228,11 @@
         }
 
         function setUserPermission(userId) {
-            
+            alert($("#userRole").val());
             $.ajax({
                 url: '/updateUserPermissions',
                 dataType: 'json',
-                data: { "userId": userId, "roleName": $("#userRole").options[$("#userRole").selectedIndex].value },
+                data: { "userId": userId, "roleName":"" },
                 type: "POST",
                 success: function (data) {
 
