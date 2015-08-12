@@ -30,11 +30,12 @@ exports.getUserManagement = function (req, res) {
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
 		usersCollection = userCollection;
+		var authUserId = req.user._id;
 		res.render('partials/usermanagement', {
 			title: 'User Management Portal',
 			_csrf: req.csrfToken(),
 			users: usersCollection,
-			userId: req.user._id
+			userId: authUserId
 		});
 	});
 };
