@@ -101,7 +101,8 @@ exports.createUser = function(req, res, next) {
 	password: 'curtiscurtis',
 	isAdmin: false,
 	isSiteAdmin: true
-  });
+	});
+	console.log(user);
 
   //User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
   //  if (existingUser) {
@@ -115,6 +116,33 @@ exports.createUser = function(req, res, next) {
   //  });
   //});
 };
+
+exports.contactUser = function (req, res, next) { 
+
+};
+
+exports.updateUserPermissions = function (req, res, next) {
+	var userId = req.body.userId;
+	var roleName = req.body.roleName;
+	
+	User.findById(req.body.userId, function (err, user) {
+		if (err) return next(err);
+				
+		if (roleName === siteAdmin) {
+			user.isSiteAdmin = true
+		}
+		else { 
+			user.isSiteAdmin = false;
+		}
+		user.profile.roleName = roleName;
+		user.save(function (err) {
+			if (err) return next(err);
+			req.flash('success', { msg: 'Profile information updated.' });
+			res.redirect('/usermanagement');
+		});
+	});
+		
+}
 
 /**
  * GET /account
