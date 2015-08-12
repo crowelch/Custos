@@ -137,7 +137,12 @@
 
     function deleteUser() {
         var userId = $('#userId').val();
-        alert(userId);
+        $.ajax({
+            url: 'deleteUser',
+            data: userId,
+            success: function (data) {
+            }
+        });
 
     }
 </script>
