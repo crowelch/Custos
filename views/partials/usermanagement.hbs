@@ -192,7 +192,7 @@
         function createUser() {
             var userEmail = $('#email').val();
             var mNumber = $('#mNumber').val();
-            var roleName = $('select[name=userRole]').val();
+            var roleName = $('select option:selected').val();
 
             console.log(roleName);
             console.log(mNumber);
