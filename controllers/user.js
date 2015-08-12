@@ -26,6 +26,12 @@ exports.getLogin = function (req, res) {
  */
  
 exports.getUserManagement = function (req, res) {
+	var Handlebars = require('handlebars/runtime')['default'];
+	Handlebars.registerHelper('select', function (value, options) {
+		var $el = $('<select />').html(options.fn(this));
+		$el.find('[value="' + value + '"]').attr({ 'selected': 'selected' });
+		return $el.html();
+	});
 	var usersCollection;
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
