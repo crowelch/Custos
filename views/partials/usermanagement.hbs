@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-    
+    alert({{user._id}};
      <table class="table-striped table-condensed table-hover table table-bordered">
         <tr>
             <th>Full Name</th>
@@ -115,7 +115,7 @@
             <td>{{this.mNumber}}</td>
             <td>{{this.email}}</td>
             <td>
-                <select id="userRole" {{#if_eq this._id user._id}} disabled="disabled" {{/if_eq}} onchange="setUserPermission(this, '{{this._id}}')">
+                <select id="userRole" disabled="disabled" {{/if_eq}} onchange="setUserPermission(this, '{{this._id}}')">
                     {{#select this.profile.roleName}}
                     <option value="Blocked">Blocked</option>
                     <option value="User">User</option>
