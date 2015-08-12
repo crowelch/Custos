@@ -115,7 +115,7 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', csrfProtection, passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/inventory', csrfProtection, passportConf.isAuthenticated, inventoryController.getInventory);
 app.get('/usermanagement', csrfProtection, passportConf.isAuthenticated, userController.getUserManagement);
-app.post('/deleteUser:userId', passportConf.isAuthenticated, userController.postDeleteAccount);
+app.post('/deleteUser/:userId', passportConf.isAuthenticated, userController.postDeleteAccount);
 
 
 /**
