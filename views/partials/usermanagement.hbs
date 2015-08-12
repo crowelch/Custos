@@ -228,7 +228,7 @@
         }
 
         function setUserPermission(userId) {
-            var roleName = $('#userRole').val();
+            var roleName = $(this).val();
             $.ajax({
                 url: '/updateUserPermissions',
                 dataType: 'json',
