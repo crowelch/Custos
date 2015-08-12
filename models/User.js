@@ -2,11 +2,10 @@ var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 
-var userSchema = new mongoose.Schema({
+var userSchema = new mongoose.Schema( {
 	email: { type: String, unique: true, lowercase: true },
-    mNumber: {type: String, unique: true, lowercase:false},
-  password: String,
-	isAdmin : Boolean,
+	mNumber: { type: String, unique: true, lowercase: false },
+	password: String,
     isSiteAdmin: Boolean,
 	profile: {
 		roleName: { type: String, default: 'User' },

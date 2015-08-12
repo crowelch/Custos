@@ -93,12 +93,12 @@
     <Compile Include="app.js" />
     <Compile Include="config\passport.js" />
     <Compile Include="config\secrets.js" />
+    <Compile Include="lib\helpers.js" />
     <Compile Include="setup.js" />
     <Compile Include="controllers\contact.js" />
     <Compile Include="controllers\home.js" />
     <Compile Include="controllers\inventory.js" />
     <Compile Include="controllers\user.js" />
-    <Compile Include="lib\helpers.js" />
     <Compile Include="models\User.js" />
     <Compile Include="test\app.js" />
     <Compile Include="test\models.js" />
@@ -107,7 +107,6 @@
     <Compile Include="public\js\main.js" />
     <Compile Include="public\js\lib\bootstrap.min.js" />
     <Content Include="views\partials\dashboard.hbs" />
-    <Content Include="views\partials\TextFile1.txt" />
     <Content Include="views\partials\usermanagement.hbs" />
   </ItemGroup>
   <ItemGroup>

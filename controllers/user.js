@@ -138,10 +138,8 @@ exports.postUpdateProfile = function(req, res, next) {
 		user.profile.fullName = req.body.fullName || '';
 		user.profile.displayName = req.body.displayName || '';
 		user.mNumber = 'M01234567';
-		if (user.isAdmin) {
-			user.profile.roleName = "Admin";
-		}
-		else if (user.isSiteAdmin) {
+
+		 if (user.isSiteAdmin) {
 			user.profile.roleName = "siteAdmin";
 		}
 		else {
