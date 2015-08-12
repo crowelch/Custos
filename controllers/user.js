@@ -33,7 +33,8 @@ exports.getUserManagement = function (req, res) {
 		res.render('partials/usermanagement', {
 			title: 'User Management Portal',
 			_csrf: req.csrfToken(),
-			users: usersCollection
+			users: usersCollection,
+			user: req.user
 		});
 	});
 };
