@@ -91,27 +91,27 @@ exports.createUser = function(req, res, next) {
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/signup');
+    return res.redirect('/usermanagement');
   }
 
-  var user = new User({
-    email: req.body.email,
-	password: req.body.password,
+	var user = new User( {
+		email: req.body.email,
+		mNumber : req.body.mNumber,
+	profile: { roleName : req.body.userRole },
+	password: 'curtiscurtis',
 	isAdmin: false,
 	isSiteAdmin: true
   });
 
-  User.findOne({ email: req.body.email }, function(err, existingUser) {
+  User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
     if (existingUser) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/signup');
+      return res.redirect('/usermanagement');
     }
     user.save(function(err) {
       if (err) return next(err);
-      req.logIn(user, function(err) {
-        if (err) return next(err);
-        res.redirect('/');
-      });
+	  res.flash('success', { msg: 'The account was created successfully' });
+	  return res.redirect('/usermanagement');
     });
   });
 };
@@ -181,31 +181,11 @@ exports.postUpdatePassword = function(req, res, next) {
  */
 exports.postDeleteAccount = function (req, res, next) {
 	console.log(req.body.userId);
-  //User.remove({ _id: req.user.id }, function(err) {
+  //User.remove({ _id: req.body.userId }, function(err) {
   //  if (err) return next(err);
   //  req.flash('info', { msg: 'the account has been deleted.' });
   //  res.redirect('/usermanagement');
   //});
-};
-
-/**
- * GET /account/unlink/:provider
- * Unlink OAuth provider.
- */
-exports.getOauthUnlink = function(req, res, next) {
-  var provider = req.params.provider;
-  User.findById(req.user.id, function(err, user) {
-    if (err) return next(err);
-
-    user[provider] = undefined;
-    user.tokens = _.reject(user.tokens, function(token) { return token.kind === provider; });
-
-    user.save(function(err) {
-      if (err) return next(err);
-      req.flash('info', { msg: provider + ' account has been unlinked.' });
-      res.redirect('/account');
-    });
-  });
 };
 
 /**

@@ -112,7 +112,6 @@ app.get('/account', csrfProtection, passportConf.isAuthenticated, userController
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
-app.get('/account/unlink/:provider', csrfProtection, passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/inventory', csrfProtection, passportConf.isAuthenticated, inventoryController.getInventory);
 app.get('/usermanagement', csrfProtection, passportConf.isAuthenticated, userController.getUserManagement);
 app.post('/deleteUser', userController.postDeleteAccount);
