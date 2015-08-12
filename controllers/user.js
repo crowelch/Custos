@@ -26,7 +26,7 @@ exports.getLogin = function (req, res) {
  */
  
 exports.getUserManagement = function (req, res) {
-	var Handlebars = require('handlebars/runtime')['default'];
+	var Handlebars = require('handlebars')['default'];
 	Handlebars.registerHelper('select', function (value, options) {
 		var $el = $('<select />').html(options.fn(this));
 		$el.find('[value="' + value + '"]').attr({ 'selected': 'selected' });
