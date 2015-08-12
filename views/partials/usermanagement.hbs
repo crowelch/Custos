@@ -110,12 +110,12 @@
         </tr>
         {{#each users}}
         <tr>
-            <td>{{this.profile.fullName}}</td>
+            <td>{{this.profile.fullName}}{{userId}}</td>
             <td>{{this.profile.displayName}}</td>
             <td>{{this.mNumber}}</td>
             <td>{{this.email}}</td>
             <td>
-                <select id="userRole" {{#if_eq this._id " " userId}}disabled {{/if_eq}} onchange="setUserPermission(this, '{{this._id}}')">
+                <select id="userRole" {{#if_eq this._id userId}}disabled {{/if_eq}} onchange="setUserPermission(this, '{{this._id}}')">
                     {{#select this.profile.roleName}}
                     <option value="Blocked">Blocked</option>
                     <option value="User">User</option>
