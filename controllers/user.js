@@ -85,9 +85,9 @@ exports.logout = function(req, res) {
 exports.createUser = function(req, res, next) {
 
 	var user = new User( {
-		email: req.body.email,
+		email: req.body.userEmail,
 		mNumber : req.body.mNumber,
-	profile: { roleName : req.body.userRole },
+	profile: { roleName : req.body.roleName },
 	password: 'curtiscurtis',
 	isAdmin: false,
 	isSiteAdmin: true
