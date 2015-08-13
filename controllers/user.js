@@ -100,11 +100,12 @@ exports.createUser = function(req, res, next) {
          return res.send({ redirect: '/userManagement' });
     }
     user.save(function(err) {
-      if (err) return next(err);
+        if (err) return next(err);
+        req.flash('success', { msg: 'Account was created successfully.' });
+        return res.send({ redirect: '/userManagement' });
     });
   });
-  req.flash('success', { msg: 'Account was created successfully.' });
-  return res.send({ redirect: '/userManagement' });
+ 
 };
 
 exports.contactUser = function (req, res, next) { 
