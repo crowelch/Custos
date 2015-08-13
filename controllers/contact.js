@@ -11,37 +11,26 @@ var options = {
 var mailer = nodemailer.createTransport(sgTransporter(options));
 
 /**
- * GET /contact
- * Contact form page.
- */
-exports.getContact = function(req, res) {
-  res.render('contact', {
-    title: 'Contact',
-    _csrf: req.csrfToken()
-  });
-};
-
-/**
  * POST /contact
  * Send a contact form via Nodemailer.
  */
 exports.postContact = function(req, res) {
-  req.assert('name', 'Name cannot be blank').notEmpty();
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('message', 'Message cannot be blank').notEmpty();
+  req.assert('emailSubject', 'Subject cannot be blank').notEmpty();
+  req.assert('userEmail', 'Email is not valid').isEmail();
+  req.assert('emailBody', 'Message cannot be blank').notEmpty();
 
   var errors = req.validationErrors();
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/contact');
+    res.send({ redirect: '/userManagement' });
   }
 
-  var from = req.body.email;
-  var name = req.body.name;
-  var body = req.body.message;
-  var to = 'chris@chriswendt.net';
-  var subject = 'Contact Form | Hackathon Starter';
+  var from = req.user.email;
+  var name = req.user.profile.fullName;
+  var body = req.body.emailBody;
+  var to = req.body.userEmail;
+  var subject = req.body.emailSubject;
 
   var mailOptions = {
     to: to,
@@ -53,9 +42,9 @@ exports.postContact = function(req, res) {
   transporter.sendMail(mailOptions, function(err) {
     if (err) {
       req.flash('errors', { msg: err.message });
-      return res.redirect('/contact');
+      res.send({ redirect: '/userManagement' });
     }
     req.flash('success', { msg: 'Email has been sent successfully!' });
-    res.redirect('/contact');
+    res.send({ redirect: '/userManagement' });
   });
 };

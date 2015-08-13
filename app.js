@@ -116,7 +116,7 @@ app.get('/inventory', csrfProtection, passportConf.isAuthenticated, inventoryCon
 app.get('/usermanagement', csrfProtection, passportConf.isAuthenticated, userController.getUserManagement);
 app.post('/deleteUser', userController.postDeleteAccount);
 app.post('/createUser', userController.createUser);
-app.post('/contactUser',userController.contactUser)
+app.post('/contactUser',contactController.postContact)
 app.post('/updateUserPermissions', userController.updateUserPermissions);
 
 
