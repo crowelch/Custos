@@ -6,12 +6,13 @@ var userSchema = new mongoose.Schema( {
 	email: { type: String, unique: true, lowercase: true },
 	mNumber: { type: String, unique: true, lowercase: false },
 	password: String,
-    isSiteAdmin: Boolean,
+	isSiteAdmin: Boolean,
+	isSiteOwner: { type : Boolean, default : false },
 	profile: {
 		roleName: { type: String, default: 'User' },
-	fullName: { type: String, default: '' },
-	displayName: {type: String, default: ''},
-	picture: { type: String, default: '' }
+		fullName: { type: String, default: '' },
+		displayName: {type: String, default: ''},
+		picture: { type: String, default: '' }
   },
 
   resetPasswordToken: String,

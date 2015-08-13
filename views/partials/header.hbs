@@ -10,6 +10,9 @@
                 <li><a href="/usermanagement">User Management</a></li>
                <li><a href="/admin">System Administration</a></li>
           {{/if}}
+          {{#if user.isSiteOwner}}
+          <li><a href="/transferOwnership">Transfer Site Ownership</a></li>
+          {{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{#unless user}}

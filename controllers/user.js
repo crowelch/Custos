@@ -27,14 +27,13 @@ exports.getLogin = function (req, res) {
  
 exports.getUserManagement = function (req, res) {
 	var usersCollection;
+	console.log(req.user._id);
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
 		usersCollection = userCollection;
-		console.log(req.user._id);
 		res.render('partials/usermanagement', {
 			title: 'User Management Portal',
 			_csrf: req.csrfToken(),
-			id: req.user._id,
 			users: usersCollection
 		});
 	});
