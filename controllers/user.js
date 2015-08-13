@@ -105,7 +105,7 @@ exports.createUser = function(req, res, next) {
       flashMessage = { msg: 'The account was created successfully' };
     });
   });
-  req.flash(flashType, flashMessage);
+  req.flash('success', {msg: 'the account was created successfully'});
   res.send({ redirect: '/userManagement' });
 };
 
