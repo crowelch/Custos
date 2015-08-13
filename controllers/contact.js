@@ -26,25 +26,19 @@ exports.postContact = function(req, res) {
     res.send({ redirect: '/userManagement' });
   }
 
-  var from = req.user.email;
-  var name = req.user.profile.fullName;
-  var body = req.body.emailBody;
-  var to = req.body.userEmail;
-  var subject = req.body.emailSubject;
-
-  var mailOptions = {
-    to: to,
-    from: from,
-    subject: subject,
-    text: body
-  };
-
-  transporter.sendMail(mailOptions, function(err) {
-    if (err) {
+  var userMessage = {
+    to: req.body.userEmail,
+    from: req.user.email,
+    subject: req.body.emailSubject,
+    text: req.body.emailBody
+  }
+  
+  mailer.sendMail(userMessage, function(err, res){
+    if(err){
       req.flash('errors', { msg: err.message });
       res.send({ redirect: '/userManagement' });
     }
-    req.flash('success', { msg: 'Email has been sent successfully!' });
+     req.flash('success', { msg: 'Email has been sent successfully!' });
     res.send({ redirect: '/userManagement' });
   });
 };

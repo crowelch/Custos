@@ -101,7 +101,7 @@
         $.ajax({
             url: '/contactUser',
             dataType: 'json',
-            data: { "userEmail": userEmail, "emailBody": emailBody },
+            data: { "userEmail": userEmail, "emailBody": emailBody, "emailSubject": emailSubject },
             type: "POST",
             success: function (data) {
                 if (typeof data.redirect == "string") {
