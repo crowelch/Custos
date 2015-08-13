@@ -27,7 +27,6 @@ exports.getLogin = function (req, res) {
  
 exports.getUserManagement = function (req, res) {
 	var usersCollection;
-	console.log(req.user._id);
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
 		usersCollection = userCollection;
@@ -84,12 +83,6 @@ exports.logout = function(req, res) {
  * Create a new local account.
  */
 exports.createUser = function(req, res, next) {
-	console.log(req.body.email);
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/usermanagement');
-  }
 
 	var user = new User( {
 		email: req.body.email,
