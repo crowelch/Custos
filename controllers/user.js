@@ -83,7 +83,8 @@ exports.logout = function(req, res) {
  * Create a new local account.
  */
 exports.createUser = function(req, res, next) {
-
+    var flashMessage;
+    var flashType;
 	var user = new User( {
 		email: req.body.userEmail,
 		mNumber : req.body.mNumber,
@@ -94,13 +95,16 @@ exports.createUser = function(req, res, next) {
 	});
 
   User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
-    if (existingUser) {
-        req.flash('errors', { msg: 'Account with email or mNumber already exists.' });
+      if (existingUser) {
+          flashType = 'errors';
+          flashMessage = { msg: 'Account with email or mNumber already exists.' };
     }
     user.save(function(err) {
       if (err) return next(err);
-	  res.flash('success', { msg: 'The account was created successfully' });
+      flashType = 'success' 
+      flashMessage = { msg: 'The account was created successfully' };
     });
+    res.flash(flashType, flashMessage);
     res.send({ redirect: '/userManagement' });
   });
 };
