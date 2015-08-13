@@ -96,15 +96,16 @@ exports.createUser = function(req, res, next) {
 
   User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
       if (existingUser) {
-          flashType = 'errors';
-          flashMessage = { msg: 'Account with email or mNumber already exists.' };
+          flashType = "'errors'";
+          flashMessage = "'Account with email or mNumber already exists.'";
     }
     user.save(function(err) {
       if (err) return next(err);
-      flashType = 'success' 
-      flashMessage = 'The account was created successfully';
+      flashType = "'success'";
+      flashMessage = "'The account was created successfully'";
     });
   });
+    conso
   req.flash('success', {msg: flashMessage});
   res.send({ redirect: '/userManagement' });
 };
