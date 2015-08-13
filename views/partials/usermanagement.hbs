@@ -115,16 +115,20 @@
             <td>{{this.mNumber}}</td>
             <td>{{this.email}}</td>
             <td>
-                <select id="userRole" {{#if_eq this._id id}}disabled {{/if_eq}} onchange="setUserPermission(this, '{{this._id}}')">
+                {{#unless this.isSiteOwner}}
+                <select id="userRole" onchange="setUserPermission(this, '{{this._id}}')">
                     {{#select this.profile.roleName}}
                     <option value="Blocked">Blocked</option>
                     <option value="User">User</option>
                     <option value="SiteAdmin">Site Admin</option>
                     {{/select}}
                 </select>
+                {{else}}
+                The site owner permissions cannot be changed except via transfer
+                {{/unless}}
             </td>
             <td><a data-toggle="modal" data-target="#contactUserModal" data-user-email="{{this.email}}">Contact User</a></td>
-            <td><a data-toggle="modal" data-target="#deleteUserModal" data-user-id="{{this._id}}" data-user-fullname="{{this.profile.fullName}}" data-user-email="{{this.email}}">Delete User</a></td>
+            <td>{{#unless this.isSiteOwner}}<a data-toggle="modal" data-target="#deleteUserModal" data-user-id="{{this._id}}" data-user-fullname="{{this.profile.fullName}}" data-user-email="{{this.email}}">Delete User</a>{{/unless}}</td>
         </tr>
         {{/each}}
     </table>
