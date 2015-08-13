@@ -94,7 +94,7 @@ exports.createUser = function(req, res, next) {
 	isSiteAdmin: true
 	});
 
-  User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
+  User.findOne({ email: req.body.email }, function(err, existingUser) {
       if (existingUser) {
           req.flash('errors', { msg: 'Account already exists' });
           res.send({ redirect: '/userManagement' });
