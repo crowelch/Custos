@@ -76,10 +76,6 @@
         var mNumber = $('#mNumber').val();
         var roleName = $('select option:selected').val();
 
-        console.log(roleName);
-        console.log(mNumber);
-        console.log(userEmail);
-
         $.ajax({
             url: '/createUser',
             dataType: 'json',

@@ -85,7 +85,6 @@ exports.logout = function(req, res) {
  */
 exports.createUser = function(req, res, next) {
 	console.log(req.body.email);
-  var errors = req.validationErrors();
 
   if (errors) {
     req.flash('errors', errors);
