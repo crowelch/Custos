@@ -102,7 +102,7 @@ exports.createUser = function(req, res, next) {
     user.save(function(err) {
       if (err) return next(err);
 	  res.flash('success', { msg: 'The account was created successfully' });
-	  return res.redirect('/usermanagement');
+	  res.send({ redirect: '/userManagement' });
     });
   });
 };
@@ -130,7 +130,7 @@ exports.updateUserPermissions = function (req, res, next) {
 		user.save(function (err) {
 			if (err) return next(err);
 			req.flash('success', { msg: 'Profile information updated.' });
-			res.redirect('/usermanagement');
+			res.send({ redirect: '/userManagement' });
 		});
 	});
 		
@@ -207,12 +207,11 @@ exports.postUpdatePassword = function(req, res, next) {
  * Delete user account.
  */
 exports.postDeleteAccount = function (req, res, next) {
-	console.log(req.body.userId);
-  //User.remove({ _id: req.body.userId }, function(err) {
-  //  if (err) return next(err);
-  //  req.flash('info', { msg: 'the account has been deleted.' });
-  //  res.redirect('/usermanagement');
-  //});
+  User.remove({ _id: req.body.userId }, function(err) {
+    if (err) return next(err);
+    req.flash('info', { msg: 'the account has been deleted.' });
+    res.send({ redirect: '/userManagement' });
+  });
 };
 
 /**

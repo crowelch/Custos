@@ -67,6 +67,9 @@
             data: { "userId": userId },
             type: "POST",
             success: function (data) {
+                if (typeof data.redirect == "string") {
+                    window.location = data.redirect
+                }
             }
         });
     }
@@ -82,6 +85,9 @@
             data: { "userEmail": userEmail, "mNumber": mNumber, "roleName": roleName },
             type: "POST",
             success: function (data) {
+                if (typeof data.redirect == "string") {
+                    window.location = data.redirect
+                }
             }
         });
     }
@@ -109,7 +115,9 @@
             data: { "userId": userId, "roleName": ddlRole.value },
             type: "POST",
             success: function (data) {
-
+                if (typeof data.redirect == "string") {
+                    window.location = data.redirect
+                }
             }
         });
     }
