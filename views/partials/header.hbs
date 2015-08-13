@@ -10,9 +10,6 @@
                 <li><a href="/usermanagement">User Management</a></li>
                <li><a href="/admin">System Administration</a></li>
           {{/if}}
-          {{#if user.isSiteOwner}}
-          <li><a href="/transferOwnership">Transfer Site Ownership</a></li>
-          {{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{#unless user}}
@@ -38,7 +35,11 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="/account">My Account</a></li>
-            <li class="divider"></li>
+              <li class="divider"></li>
+              {{#if user.isSiteOwner}}
+              <li><a href="/transferOwnership">Transfer Site Ownership</a></li>
+              <li class="divider"></li>
+              {{/if}}
             <li><a href="/logout">Logout</a></li>
           </ul>
         </li>

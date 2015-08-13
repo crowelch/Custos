@@ -121,7 +121,6 @@ exports.updateUserPermissions = function (req, res, next) {
 		console.log(userId);
 		if (roleName === "SiteAdmin") {
 		    user.isSiteAdmin = true;
-		    user.isSiteOwner = true;
 		}
 		else { 
 			user.isSiteAdmin = false;
