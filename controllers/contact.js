@@ -33,12 +33,13 @@ exports.postContact = function(req, res) {
     text: req.body.emailBody
   }
   
-  mailer.sendMail(userMessage, function(err, res){
+  mailer.sendMail(userMessage, function(err, resp){
     if(err){
       req.flash('errors', { msg: err.message });
-      res.send({ redirect: '/userManagement' });
     }
-     req.flash('success', { msg: 'Email has been sent successfully!' });
+    else{
+           req.flash('success', { msg: 'Email has been sent successfully!' });
+    }
     res.send({ redirect: '/userManagement' });
   });
 };
