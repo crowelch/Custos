@@ -84,10 +84,7 @@ exports.logout = function(req, res) {
  * Create a new local account.
  */
 exports.createUser = function(req, res, next) {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
-
+	console.log(req.body.email);
   var errors = req.validationErrors();
 
   if (errors) {
@@ -107,7 +104,7 @@ exports.createUser = function(req, res, next) {
 
   User.findOne({ email: req.body.email, mNumber: req.body.mNumber }, function(err, existingUser) {
     if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
+      req.flash('errors', { msg: 'Account with email or mNumber already exists.' });
       return res.redirect('/usermanagement');
     }
     user.save(function(err) {
