@@ -43,6 +43,25 @@ var passportConf = require('./config/passport');
 var app = express();
 
 /**
+ * Create Gith webhook 
+ */
+var gith = require('gith').create(9001);
+var execFile = require('child_process').execFile;
+gith({
+	repo: 'kfechter/Custos'
+}).on('all', function (payload) {
+	if (payload.branch === 'master') {
+		// Exec a shell script
+		var execOptions = {
+			maxBuffer: 1024 * 1024 // 1mb
+		}
+		execFile('~/hook.sh', execOptions, function (error, stdout, stderr) {
+			// Log success in some manner
+			console.log('exec complete');
+		});
+	}
+});
+/**
  * Connect to MongoDB.
  */
 mongoose.connect(secrets.db);
