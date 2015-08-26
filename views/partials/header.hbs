@@ -5,7 +5,9 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/inventory">Inventory Search</a></li>
+          {{#if user}}
+            <li><a href="/inventory">Inventory Search</a></li>
+          {{/if}}
           {{#if user.isSiteAdmin}}
                 <li><a href="/usermanagement">User Management</a></li>
                <li><a href="/admin">System Administration</a></li>
