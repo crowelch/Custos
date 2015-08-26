@@ -94,6 +94,9 @@
     <Compile Include="config\passport.js" />
     <Compile Include="config\secrets.js" />
     <Compile Include="lib\helpers.js" />
+    <Compile Include="models\Item.js" />
+    <Compile Include="models\Project.js" />
+    <Compile Include="models\Tool.js" />
     <Compile Include="setup.js" />
     <Compile Include="controllers\contact.js" />
     <Compile Include="controllers\home.js" />
