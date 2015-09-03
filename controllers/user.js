@@ -124,7 +124,8 @@ exports.transferOwnership = function (req, res) {
 						user.save(function (err) {
 							if (err) return console.log(err);
 							req.flash('success', { msg: 'Profile information updated.' });
-							res.send({ redirect: currentPage});
+							res.send({ redirect: currentPage });
+							console.log("success");
 						});
 					}
 				});
