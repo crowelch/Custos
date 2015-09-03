@@ -141,7 +141,7 @@
         $.ajax({
             url: '/transferOwnership',
             dataType: 'json',
-            data: { "transferUsername": targetUsername, "currentPage" : window.location.href },
+            data: { "transferUsername": targetUsername},
             type: "POST",
             success: function (data) {
                 if (typeof data.redirect == "string") {

@@ -108,7 +108,6 @@ exports.createUser = function(req, res, next) {
 
 exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
-	var currentPage = req.body.currentPage;
 	User.findOne({ email: transferTarget }, function (targetUser, err) {
 		if (err) { return console.log(err); }
 		if (targetUser) {
@@ -124,7 +123,7 @@ exports.transferOwnership = function (req, res) {
 						user.save(function (err) {
 							if (err) return console.log(err);
 							req.flash('success', { msg: 'Profile information updated.' });
-							res.send({ redirect: currentPage });
+							res.send({ redirect: '/' });
 							console.log("success");
 						});
 					}
