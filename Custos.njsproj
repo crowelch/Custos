@@ -93,6 +93,7 @@
     <Compile Include="app.js" />
     <Compile Include="config\passport.js" />
     <Compile Include="config\secrets.js" />
+    <Compile Include="lib\document.js" />
     <Compile Include="lib\helpers.js" />
     <Compile Include="models\Item.js" />
     <Compile Include="models\Project.js" />
