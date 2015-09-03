@@ -118,7 +118,7 @@ app.post('/deleteUser', userController.postDeleteAccount);
 app.post('/createUser', userController.createUser);
 app.post('/contactUser',contactController.postContact)
 app.post('/updateUserPermissions', userController.updateUserPermissions);
-app.post('/transferOwnership', csrfProtection, passportConf.isAuthenticated, userController.transferOwnership);
+app.post('/transferOwnership', passportConf.isAuthenticated, userController.transferOwnership);
 
 
 /**
