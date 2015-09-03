@@ -108,30 +108,39 @@ exports.createUser = function(req, res, next) {
 
 exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
-	User.findOne({ email: transferTarget }, function (targetUser, err) {
-		if (err) { return console.log(err); }
-		if (targetUser) {
-			targetUser.isSiteAdmin = true;
-			targetUser.isSiteOwner = true;
-			targetUser.save(function (err) {
-				if (err) return console.log(err);
-				User.findById(req.user._id, function (err, user) { 
-					if (err) { return console.log(err); }
-					if (user) {
-						user.isSiteAdmin = false;
-						user.isSiteAdmin = false;
-						user.save(function (err) {
-							if (err) return console.log(err);
-							req.flash('success', { msg: 'Profile information updated.' });
-							res.send({ redirect: '/' });
-							console.log("success");
-						});
-					}
-				});
-			});
-		}
+	var transferUser = req.user;
+	var targetUser;
+	var transferSuccessful;
+	var targetSuccessful;
+	
+	User.findOne({ email: transferTarget }, function (transferTargetUser, err) {
+		if (err) return console.log(err);
+		targetUser = transferTargetUser;
 	});
 	
+	if (targetUser) {
+		targetUser.isSiteAdmin = true;
+		targetUser.isSiteOwner = true;
+		targetUser.save(function (err) {
+			if (err) { targetSuccessful = false; return console.log(err); }
+			// if we are successfull, now revoke the request user.
+			targetSuccessful = true
+			transferUser.isSiteAdmin = false;
+			transferUser.isSiteOwner = false;
+			transferUser.save(function (err) {
+				if (err) return console.log(err);
+				transferSuccessful = true;
+			});
+		
+		});
+	}
+	
+	if (targetSuccessful && transferSuccessful) { 
+		req.flash('success', { msg: 'Profile information updated.' });
+		res.send({ redirect: '/' });
+		console.log("success");
+	}
+		
 };
 
 exports.updateUserPermissions = function (req, res, next) {
