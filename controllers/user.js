@@ -136,11 +136,11 @@ exports.transferOwnership = function (req, res) {
 	}
 	
 	if (targetSuccessful && transferSuccessful) {
-		req.flash('success', { msg: 'Profile information updated.' });
+		req.flash('success', { msg: 'Ownership Transfer Complete.' });
 		res.send({ redirect: '/' });
-		console.log("success");
 	} else {
-		console.log("failure");
+		req.flash('error', { msg: 'Ownership Transfer Failed.' });
+		res.send({ redirect: '/' });
 	}
 		
 };
