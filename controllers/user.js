@@ -107,6 +107,8 @@ exports.createUser = function(req, res, next) {
 };
 
 exports.transferOwnership = function (req, res, next) {
+	console.log(req.user);
+	console.log(req.body.transferUsername);
 	var transferTarget = req.body.transferUsername;
 	var currentPage = req.body.currentPage;
 	User.findOne({ email: transferTarget }, function (targetUser, err) {
