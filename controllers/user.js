@@ -108,7 +108,6 @@ exports.createUser = function(req, res, next) {
 
 exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
-	var transferUser;
 	var targetUser;
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
@@ -116,30 +115,31 @@ exports.transferOwnership = function (req, res) {
 		targetUser = transferTargetUser;
 	});
 	
-	User.findOne({ _id: req.user._id }, function (err, transferHostUser) {
-		if (err) return console.log(err);
-		transferUser = transferHostUser;
-	});
+
 	
 	if (targetUser) {
 		targetUser.isSiteAdmin = true;
 		targetUser.isSiteOwner = true;
 		targetUser.save(function (err) {
-			if (err) { return console.log(err); }
-			// if we are successfull, now revoke the request user.
-			transferHostUser.isSiteAdmin = false;
-			transferHostUser.isSiteOwner = false;
-			transferHostUser.save(function (err) {
 				if (err) { 
 					req.flash('error', { msg: 'Ownership Transfer Failed.' });
 					return res.send({ redirect: '/' });
 				}
-				req.flash('success', { msg: 'Ownership Transfer Complete.' });
+			req.flash('success', { msg: 'Ownership Transfer Complete.' });
+			revokeUserOwnership(req.user);
 				return res.send({ redirect: '/' });
 			});
-		});
 	}
 };
+
+
+function revokeUserOwnership(user) {
+	user.isSiteAdmin = false;
+	user.isSiteOwner = false;
+	user.save(function (err) {
+		if (err) console.log(err);
+	});
+}
 
 exports.updateUserPermissions = function (req, res, next) {
 	var userId = req.body.userId;
