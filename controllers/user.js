@@ -135,10 +135,12 @@ exports.transferOwnership = function (req, res) {
 		});
 	}
 	
-	if (targetSuccessful && transferSuccessful) { 
+	if (targetSuccessful && transferSuccessful) {
 		req.flash('success', { msg: 'Profile information updated.' });
 		res.send({ redirect: '/' });
 		console.log("success");
+	} else {
+		console.log("failure");
 	}
 		
 };
@@ -149,9 +151,6 @@ exports.updateUserPermissions = function (req, res, next) {
 	
 	User.findById(req.body.userId, function (err, user) {
 		if (err) return next(err);
-		console.log(user);
-		console.log(roleName);
-		console.log(userId);
 		if (roleName === "SiteAdmin") {
 		    user.isSiteAdmin = true;
 		}
