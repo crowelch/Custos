@@ -120,11 +120,12 @@ exports.transferOwnership = function (req, res) {
 		targetUser.isSiteAdmin = true;
 		targetUser.isSiteOwner = true;
 		targetUser.save(function (err) {
-	});
-
-req.flash('success', { msg: 'Ownership Transfer Complete.' });
-return res.send({ redirect: '/' });
-};
+		});
+		
+		req.flash('success', { msg: 'Ownership Transfer Complete.' });
+		return res.send({ redirect: '/' });
+	};
+}
 
 exports.renderOwnership = function (req, res) {
 	res.render('partials/transferOwnership', {
