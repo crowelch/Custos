@@ -138,7 +138,6 @@ exports.renderOwnership = function (req, res) {
 
 
 function revokeUserOwnership(user) {
-	user.isSiteAdmin = false;
 	user.isSiteOwner = false;
 	user.save(function (err) {
 		if (err) console.log(err);
