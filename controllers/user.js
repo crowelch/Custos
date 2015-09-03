@@ -108,26 +108,28 @@ exports.createUser = function(req, res, next) {
 
 exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
-	var transferUser = req.user;
+	var transferUser;
 	var targetUser;
-	var transferSuccessful;
-	var targetSuccessful;
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
 		if (err) return console.log(err);
 		targetUser = transferTargetUser;
 	});
 	
+	User.findOne({ _id: req.user._id }, function (err, transferHostUser) {
+		if (err) return console.log(err);
+		transferUser = transferHostUser;
+	});
+	
 	if (targetUser) {
 		targetUser.isSiteAdmin = true;
 		targetUser.isSiteOwner = true;
 		targetUser.save(function (err) {
-			if (err) { targetSuccessful = false; return console.log(err); }
+			if (err) { return console.log(err); }
 			// if we are successfull, now revoke the request user.
-			targetSuccessful = true;
-			transferUser.isSiteAdmin = false;
-			transferUser.isSiteOwner = false;
-			transferUser.save(function (err) {
+			transferHostUser.isSiteAdmin = false;
+			transferHostUser.isSiteOwner = false;
+			transferHostUser.save(function (err) {
 				if (err) { 
 					req.flash('error', { msg: 'Ownership Transfer Failed.' });
 					return res.send({ redirect: '/' });
