@@ -109,6 +109,7 @@ exports.createUser = function(req, res, next) {
 exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
 	var targetUser;
+	revokeUserOwnership(req.user);
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
 		if (err) return console.log(err);
@@ -126,7 +127,6 @@ exports.transferOwnership = function (req, res) {
 					return res.send({ redirect: '/' });
 				}
 			req.flash('success', { msg: 'Ownership Transfer Complete.' });
-			revokeUserOwnership(req.user);
 				return res.send({ redirect: '/' });
 			});
 	}
