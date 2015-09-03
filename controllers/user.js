@@ -128,21 +128,15 @@ exports.transferOwnership = function (req, res) {
 			transferUser.isSiteAdmin = false;
 			transferUser.isSiteOwner = false;
 			transferUser.save(function (err) {
-				if (err) return console.log(err);
-				transferSuccessful = true;
+				if (err) { 
+					req.flash('error', { msg: 'Ownership Transfer Failed.' });
+					return res.send({ redirect: '/' });
+				}
+				req.flash('success', { msg: 'Ownership Transfer Complete.' });
+				return res.send({ redirect: '/' });
 			});
-		
 		});
 	}
-	
-	if (targetSuccessful && transferSuccessful) {
-		req.flash('success', { msg: 'Ownership Transfer Complete.' });
-		res.send({ redirect: '/' });
-	} else {
-		req.flash('error', { msg: 'Ownership Transfer Failed.' });
-		res.send({ redirect: '/' });
-	}
-		
 };
 
 exports.updateUserPermissions = function (req, res, next) {
