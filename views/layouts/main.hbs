@@ -137,11 +137,11 @@
 
     function transferOwnership() {
         var targetUsername = $('#transferTargetUsername').val();
-
+        console.log(targetUsername);
         $.ajax({
             url: '/transferOwnership',
             dataType: 'json',
-            data: { "transferUsername": targetUsername},
+            data: { "transferUsername": targetUsername },
             type: "POST",
             success: function (data) {
                 if (typeof data.redirect == "string") {
