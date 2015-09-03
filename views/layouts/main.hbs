@@ -111,6 +111,22 @@
         });
     }
 
+    function transferOwnership() {
+        var targetUsername = $('#transferTargetUsername').val();
+
+        $.ajax({
+            url: '/transferOwnership',
+            dataType: 'json',
+            data: { "transferUsername": targetUsername, "currentPage" : window.location },
+            type: "POST",
+            success: function (data) {
+                if (typeof data.redirect == "string") {
+                    window.location = data.redirect
+                }
+            }
+        });
+    }
+
     function setUserPermission(ddlRole, userId) {
         $.ajax({
             url: '/updateUserPermissions',

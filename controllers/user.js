@@ -94,7 +94,7 @@ exports.createUser = function(req, res, next) {
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
       if (existingUser) {
-          req.flash('success', { msg: 'Account was created successfully.' });
+          req.flash('error', { msg: 'Account already exists' });
            res.send({ redirect: '/userManagement' });
     }
     user.save(function(err) {
@@ -106,8 +106,32 @@ exports.createUser = function(req, res, next) {
  
 };
 
-exports.contactUser = function (req, res, next) { 
-
+exports.transferOwnership = function (req, res, next) {
+	var transferTarget = req.body.transferUsername;
+	var currentPage = req.body.currentPage;
+	User.findOne({ email: transferTarget }, function (targetUser, err) {
+		if (err) { return next(err); }
+		if (targetUser) {
+			targetUser.isSiteAdmin = true;
+			targetUser.isSiteOwner = true;
+			targetUser.save(function (err) {
+				if (err) return next(err);
+				User.findById(req.user._id, function (err, user) { 
+					if (err) { return next(err); }
+					if (user) {
+						user.isSiteAdmin = false;
+						user.isSiteAdmin = false;
+						user.save(function (err) {
+							if (err) return next(err);
+							req.flash('success', { msg: 'Profile information updated.' });
+							res.send({ redirect: currentPage});
+						});
+					}
+				});
+			});
+		}
+	});
+	
 };
 
 exports.updateUserPermissions = function (req, res, next) {
