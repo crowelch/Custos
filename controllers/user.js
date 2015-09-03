@@ -124,7 +124,7 @@ exports.transferOwnership = function (req, res) {
 		targetUser.save(function (err) {
 			if (err) { targetSuccessful = false; return console.log(err); }
 			// if we are successfull, now revoke the request user.
-			targetSuccessful = true
+			targetSuccessful = true;
 			transferUser.isSiteAdmin = false;
 			transferUser.isSiteOwner = false;
 			transferUser.save(function (err) {
