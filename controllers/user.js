@@ -106,17 +106,16 @@ exports.createUser = function(req, res, next) {
  
 };
 
-exports.transferOwnership = function (req, res, next) {
+exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
 	var currentPage = req.body.currentPage;
 	User.findOne({ email: transferTarget }, function (targetUser, err) {
 		if (err) { return console.log(err); }
 		if (targetUser) {
-			console.log(targetUser);
 			targetUser.isSiteAdmin = true;
 			targetUser.isSiteOwner = true;
 			targetUser.save(function (err) {
-				if (err) return next(err);
+				if (err) return console.log(err);
 				User.findById(req.user._id, function (err, user) { 
 					if (err) { return console.log(err); }
 					if (user) {
