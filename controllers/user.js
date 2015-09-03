@@ -107,12 +107,10 @@ exports.createUser = function(req, res, next) {
 };
 
 exports.transferOwnership = function (req, res, next) {
-	console.log(req.user);
-	console.log(req.body.transferUsername);
 	var transferTarget = req.body.transferUsername;
 	var currentPage = req.body.currentPage;
 	User.findOne({ email: transferTarget }, function (targetUser, err) {
-		if (err) { return next(err); }
+		if (err) { return console.log(err); }
 		if (targetUser) {
 			console.log(targetUser);
 			targetUser.isSiteAdmin = true;
@@ -120,13 +118,12 @@ exports.transferOwnership = function (req, res, next) {
 			targetUser.save(function (err) {
 				if (err) return next(err);
 				User.findById(req.user._id, function (err, user) { 
-					if (err) { return next(err); }
+					if (err) { return console.log(err); }
 					if (user) {
-						console.log(user);
 						user.isSiteAdmin = false;
 						user.isSiteAdmin = false;
 						user.save(function (err) {
-							if (err) return next(err);
+							if (err) return console.log(err);
 							req.flash('success', { msg: 'Profile information updated.' });
 							res.send({ redirect: currentPage});
 						});
