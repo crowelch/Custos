@@ -119,6 +119,7 @@ app.post('/createUser', userController.createUser);
 app.post('/contactUser',contactController.postContact)
 app.post('/updateUserPermissions', userController.updateUserPermissions);
 app.post('/transferOwnership', passportConf.isAuthenticated, userController.transferOwnership);
+app.get('/transferOwnership', passport.Conf.isAuthenticated, userController.renderOwnershipDashboard);
 
 
 /**

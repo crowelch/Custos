@@ -116,8 +116,6 @@ exports.transferOwnership = function (req, res) {
 		targetUser = transferTargetUser;
 	});
 	
-
-	
 	if (targetUser) {
 		targetUser.isSiteAdmin = true;
 		targetUser.isSiteOwner = true;
@@ -130,6 +128,12 @@ exports.transferOwnership = function (req, res) {
 				return res.send({ redirect: '/' });
 			});
 	}
+};
+
+exports.renderOwnership = function (req, res) {
+	res.render('partials/transferOwnership', {
+		title: 'Transfer Ownership'
+	});
 };
 
 
