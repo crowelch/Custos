@@ -113,7 +113,7 @@ exports.transferOwnership = function (req, res) {
 	var transferSuccessful;
 	var targetSuccessful;
 	
-	User.findOne({ email: transferTarget }, function (transferTargetUser, err) {
+	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
 		if (err) return console.log(err);
 		targetUser = transferTargetUser;
 	});
