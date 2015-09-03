@@ -112,6 +112,7 @@ exports.transferOwnership = function (req, res, next) {
 	User.findOne({ email: transferTarget }, function (targetUser, err) {
 		if (err) { return next(err); }
 		if (targetUser) {
+			console.log(targetUser);
 			targetUser.isSiteAdmin = true;
 			targetUser.isSiteOwner = true;
 			targetUser.save(function (err) {
@@ -119,6 +120,7 @@ exports.transferOwnership = function (req, res, next) {
 				User.findById(req.user._id, function (err, user) { 
 					if (err) { return next(err); }
 					if (user) {
+						console.log(user);
 						user.isSiteAdmin = false;
 						user.isSiteAdmin = false;
 						user.save(function (err) {
