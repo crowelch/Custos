@@ -111,6 +111,7 @@
     <Compile Include="public\js\main.js" />
     <Compile Include="public\js\lib\bootstrap.min.js" />
     <Content Include="views\partials\dashboard.hbs" />
+    <Content Include="views\partials\transferOwnership.hbs" />
     <Content Include="views\partials\usermanagement.hbs" />
   </ItemGroup>
   <ItemGroup>
