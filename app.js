@@ -113,7 +113,7 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/inventory', csrfProtection, passportConf.isAuthenticated, inventoryController.getInventory);
-app.get('/usermanagement', csrfProtection, passportConf.isAuthenticated, userController.getUserManagement);
+app.get('/administration', csrfProtection, passportConf.isAuthenticated, userController.getUserManagement);
 app.post('/deleteUser', userController.postDeleteAccount);
 app.post('/createUser', userController.createUser);
 app.post('/contactUser',contactController.postContact)
