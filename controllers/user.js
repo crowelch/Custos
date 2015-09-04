@@ -111,16 +111,20 @@ exports.transferOwnership = function (req, res) {
 	revokeUserOwnership(req.user);
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
-		if (err) return console.log(err);
+		if (err) {req.flash('error', { msg: 'Ownership Transfer Failed.' });
+		return res.send({ redirect: '/' });
+	}
 		if (transferTargetUser) {
 			transferTargetUser.isSiteAdmin = true;
 			transferTargetUser.isSiteOwner = true;
 			transferTargetUser.save(function (err) {
+				if (err) {	req.flash('error', { msg: 'Ownership Transfer Failed.' });
+					return res.send({ redirect: '/' });}
+				req.flash('success', { msg: 'Ownership Transfer Complete.' });
+				return res.send({ redirect: '/' });
 			});
 		}
 	});
-	req.flash('success', { msg: 'Ownership Transfer Complete.' });
-	return res.send({ redirect: '/' });
 };
 
 exports.renderOwnership = function (req, res) {
