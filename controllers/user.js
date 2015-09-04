@@ -108,19 +108,19 @@ exports.createUser = function(req, res, next) {
 
 exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
-	var targetUser;
 	revokeUserOwnership(req.user);
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
 		if (err) return console.log(err);
-		targetUser = transferTargetUser;
+		if (transferTargetUser) {
+			transferTargetUser.isSiteAdmin = true;
+			transferTargetUser.isSiteOwner = true;
+			transferTargetUser.save(function (err) {
+			});
+		}
 	});
 	
-	if (targetUser) {
-		targetUser.isSiteAdmin = true;
-		targetUser.isSiteOwner = true;
-		targetUser.save(function (err) {
-		});
+	
 		
 		req.flash('success', { msg: 'Ownership Transfer Complete.' });
 		return res.send({ redirect: '/' });
@@ -135,9 +135,11 @@ exports.renderOwnership = function (req, res) {
 
 
 function revokeUserOwnership(user) {
-	user.isSiteOwner = false;
-	user.save(function (err) {
-		if (err) console.log(err);
+	User.findById(user._id, function (err, hostUser) {
+		hostUser.isSiteOwner = false;
+		hostUser.save(function (err) {
+			if (err) console.log(err);
+		});
 	});
 }
 
