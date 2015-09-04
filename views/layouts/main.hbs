@@ -87,11 +87,26 @@
             success: function (data) {
                 if (typeof data.redirect == "string") {
                     window.location = data.redirect
-                    console.log(data.redirect);
                 }
             }
         });
     }
+
+    function transferOwnership() {
+        var targetEmail = $('#transferTargetUsername').val();
+        $.ajax({
+            url: '/transferOwnership',
+            dataType: 'json',
+            data: { transferUsername: targetEmail },
+            type: "POST",
+            success: function (data) {
+                if (typeof data.redirect == "string") {
+                    window.location = data.redirect
+                }
+            }
+        });
+
+    };
 
     function contactUser() {
         var userEmail = $('#contactEmail').val();
