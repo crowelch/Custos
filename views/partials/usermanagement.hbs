@@ -138,3 +138,26 @@
 
 <h1>Projects</h1>
 <button type="button" class="btn btn-info btn-lg" style="margin-bottom: 10px;" data-toggle="modal" data-target="#createProjectModal">Create Project</button>
+<table class="table-striped table-condensed table-hover table table-bordered">
+    <tr>
+        <th>Project Name</th>
+        <th>Members on Project</th>
+        <th>Inventory on Project</th>
+        <th>Project State</th>
+        <th>Edit Project</th>
+    </tr>
+    {{#each projects}}
+    <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.users}}</td>
+        <td>{{this.items}}</td>
+        <td>{{#if this.isActive}}
+                Active
+            {{else}}
+                Inactive
+            {{/if}}
+        </td>
+       <td><a>Edit Project</a></td>
+    </tr>
+    {{/each}}
+</table>
