@@ -108,13 +108,13 @@ exports.createUser = function(req, res, next) {
 
 exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
-	revokeUserOwnership(req.user);
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
 		if (err) {req.flash('errors', { msg: 'Ownership Transfer Failed.' });
 		return res.send({ redirect: '/' });
 	}
 		if (transferTargetUser) {
+			revokeUserOwnership(req.user);
 			transferTargetUser.isSiteAdmin = true;
 			transferTargetUser.isSiteOwner = true;
 			transferTargetUser.save(function (err) {
