@@ -94,7 +94,7 @@ exports.createUser = function(req, res, next) {
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
       if (existingUser) {
-          req.flash('error', { msg: 'Account already exists' });
+          req.flash('errors', { msg: 'Account already exists' });
            res.send({ redirect: '/userManagement' });
     }
     user.save(function(err) {
@@ -111,14 +111,14 @@ exports.transferOwnership = function (req, res) {
 	revokeUserOwnership(req.user);
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
-		if (err) {req.flash('error', { msg: 'Ownership Transfer Failed.' });
+		if (err) {req.flash('errors', { msg: 'Ownership Transfer Failed.' });
 		return res.send({ redirect: '/' });
 	}
 		if (transferTargetUser) {
 			transferTargetUser.isSiteAdmin = true;
 			transferTargetUser.isSiteOwner = true;
 			transferTargetUser.save(function (err) {
-				if (err) {	req.flash('error', { msg: 'Ownership Transfer Failed.' });
+				if (err) {	req.flash('errors', { msg: 'Ownership Transfer Failed.' });
 					return res.send({ redirect: '/' });}
 				req.flash('success', { msg: 'Ownership Transfer Complete.' });
 				return res.send({ redirect: '/' });
