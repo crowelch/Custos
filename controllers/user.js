@@ -94,7 +94,7 @@ exports.createUser = function(req, res, next) {
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
       if (existingUser) {
-          req.flash('errors', { msg: 'Account already exists' });
+          req.flash('error', { msg: 'Account already exists' });
            res.send({ redirect: '/userManagement' });
     }
     user.save(function(err) {
