@@ -27,13 +27,19 @@ exports.getLogin = function (req, res) {
  
 exports.getUserManagement = function (req, res) {
 	var usersCollection;
+	var projectsCollection;
 	getCollection("users", function (err, userCollection) {
 		if (err) { return console.log(err); }
 		usersCollection = userCollection;
-		res.render('partials/usermanagement', {
-			title: 'User Management Portal',
-			_csrf: req.csrfToken(),
-			users: usersCollection
+		getCollection("projects", function (err, projectCollection) {
+			if (err) { return console.log(err); }
+			projectsCollection = projectCollection;
+			res.render('partials/usermanagement', {
+				title: 'User Management Portal',
+				_csrf: req.csrfToken(),
+				users: usersCollection,
+				projects: projectsCollection
+			});
 		});
 	});
 };
@@ -75,8 +81,6 @@ exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
-
-
 
 /**
  * POST /usermanagement
@@ -137,7 +141,6 @@ exports.renderOwnership = function (req, res) {
 		title: 'Transfer Ownership'
 	});
 };
-
 
 function revokeUserOwnership(user) {
 	User.findById(user._id, function (err, hostUser) {
