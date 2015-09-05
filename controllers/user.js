@@ -247,7 +247,7 @@ exports.postDeleteAccount = function (req, res, next) {
   User.remove({ _id: req.body.userId }, function(err) {
     if (err) return next(err);
     req.flash('info', { msg: 'the account has been deleted.' });
-    res.send({ redirect: '/userManagement' });
+    res.send({ redirect: '/administration' });
   });
 };
 
