@@ -34,7 +34,7 @@ exports.getUserManagement = function (req, res) {
 		getCollection("projects", function (err, projectCollection) {
 			if (err) { return console.log(err); }
 			projectsCollection = projectCollection;
-			res.render('partials/usermanagement', {
+			res.render('partials/administration', {
 				title: 'User Management Portal',
 				_csrf: req.csrfToken(),
 				users: usersCollection,
@@ -99,12 +99,12 @@ exports.createUser = function(req, res, next) {
   User.findOne({ email: req.body.email }, function(err, existingUser) {
       if (existingUser) {
           req.flash('error', { msg: 'Account already exists' });
-           res.send({ redirect: '/userManagement' });
+           res.send({ redirect: '/administration' });
     }
     user.save(function(err) {
         if (err) return next(err);
         req.flash('success', { msg: 'Account was created successfully.' });
-         res.send({ redirect: '/userManagement' });
+         res.send({ redirect: '/administration' });
     });
   });
  
@@ -167,7 +167,7 @@ exports.updateUserPermissions = function (req, res, next) {
 		user.save(function (err) {
 			if (err) return next(err);
 			req.flash('success', { msg: 'Profile information updated.' });
-			res.send({ redirect: '/userManagement' });
+			res.send({ redirect: '/administration' });
 		});
 	});
 		
