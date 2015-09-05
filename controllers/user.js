@@ -184,7 +184,6 @@ exports.postUpdateProfile = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
 		user.email = req.body.email || '';
-		user.isSiteOwner = true;
 		user.profile.fullName = req.body.fullName || '';
 		user.profile.displayName = req.body.displayName || '';
 		user.mNumber = 'M01234567';
