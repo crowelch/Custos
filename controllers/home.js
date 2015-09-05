@@ -5,12 +5,9 @@ var Document = require('../lib/document');
  * Home page.
  */
 exports.index = function (req, res) {
-	var userDocumentCount;
-    User.count(function (e, count) {
-        userDocumentCount = count;
-    });
 	res.render('partials/dashboard',{
-		title: 'Home'
+		title: 'Home',
+		userName: req.user.profile.fullName;
   });
 };
 
