@@ -118,11 +118,16 @@ exports.transferOwnership = function (req, res) {
 			transferTargetUser.isSiteAdmin = true;
 			transferTargetUser.isSiteOwner = true;
 			transferTargetUser.save(function (err) {
-				if (err) {	req.flash('errors', { msg: 'Ownership Transfer Failed.' });
-					return res.send({ redirect: '/' });}
+				if (err) {
+					req.flash('errors', { msg: 'Ownership Transfer Failed.' });
+					return res.send({ redirect: '/' });
+				}
 				req.flash('success', { msg: 'Ownership Transfer Complete.' });
 				return res.send({ redirect: '/' });
 			});
+		} else { 
+			req.flash('errors', { msg: 'Transfer Account Does Not Exist.' });
+			return res.send({ redirect: '/transferOwnership' });
 		}
 	});
 };
