@@ -10,10 +10,7 @@ var options = {
 
 var mailer = nodemailer.createTransport(sgTransporter(options));
 
-/**
- * POST /contact
- * Send a contact form via Nodemailer.
- */
+
 exports.postContact = function(req, res) {
   req.assert('emailSubject', 'Subject cannot be blank').notEmpty();
   req.assert('userEmail', 'Email is not valid').isEmail();
@@ -42,4 +39,11 @@ exports.postContact = function(req, res) {
     }
     res.send({ redirect: '/userManagement' });
   });
+};
+
+
+exports.forgotPassword = function (req, res) { 
+
+
+
 };
