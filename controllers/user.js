@@ -110,7 +110,7 @@ exports.transferOwnership = function (req, res) {
 	var transferTarget = req.body.transferUsername;
 	
 	User.findOne({ email: transferTarget }, function (err, transferTargetUser) {
-		if (err) {req.flash('errors', { msg: 'Ownership Transfer Failed.' });
+		if (err) {req.flash('error', { msg: 'Ownership Transfer Failed.' });
 		return res.send({ redirect: '/' });
 	}
 		if (transferTargetUser) {
@@ -119,14 +119,14 @@ exports.transferOwnership = function (req, res) {
 			transferTargetUser.isSiteOwner = true;
 			transferTargetUser.save(function (err) {
 				if (err) {
-					req.flash('errors', { msg: 'Ownership Transfer Failed.' });
+					req.flash('error', { msg: 'Ownership Transfer Failed.' });
 					return res.send({ redirect: '/' });
 				}
 				req.flash('success', { msg: 'Ownership Transfer Complete.' });
 				return res.send({ redirect: '/' });
 			});
 		} else { 
-			req.flash('errors', { msg: 'Transfer Account Does Not Exist.' });
+			req.flash('error', { msg: 'Transfer Account Does Not Exist.' });
 			return res.send({ redirect: '/transferOwnership' });
 		}
 	});
