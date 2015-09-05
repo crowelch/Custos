@@ -7,7 +7,7 @@ var Document = require('../lib/document');
 exports.index = function (req, res) {
 	res.render('partials/dashboard',{
 		title: 'Home',
-		userName: req.user.profile.fullName;
+		userName: req.user.profile.fullName
   });
 };
 
